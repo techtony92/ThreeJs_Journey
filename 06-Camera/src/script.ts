@@ -25,8 +25,12 @@ const sizes = {
 /**
  * Camera
  */
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
-camera.position.z = 3;
+// const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1,100);
+const camera = new THREE.OrthographicCamera(-1,1, 1,-1, 0.1,100);
+camera.position.x = 2;
+camera.position.y = 2;
+camera.position.z = 2;
+camera.lookAt(mesh.position);
 scene.add(camera);
 
 /**
@@ -73,9 +77,10 @@ const tick = () =>{
     //mesh.rotation.y += 0.002 * deltaTime;
 
     // using three.clock
+
     mesh.rotation.y = elapsedTime * Math.PI * 2;
     mesh.position.y = Math.sin(elapsedTime);
-
+    camera.lookAt(mesh.position);
     //render
     renderer.render(scene, camera)
 
